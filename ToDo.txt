@@ -15,3 +15,8 @@ Connection class
 	will need functions 
 		for getting prices for a given coin.
 		dealing with slow down requests from api.
+	_______________________________________________
+	
+	Create Account class that keeps track of balances and fees.
+		
+		
