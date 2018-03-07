@@ -1,0 +1,95 @@
+Many times two separate cryptocurrency exchanges have slightly different, or very different trading price for the same pair of coins. New traders immediately have the idea that if only they could buy the low price, and sell on the other exchange for the high price there would be immediate risk-free profit also known as an "arbitrage opportunity."
+
+While the idea is solid, several undesirable effects hinder the average trader's ability to establish such an arbitrage in practice. This article explores possible solutions for these problems and introduces a bit of math which is required to make sensible judgments when arbitrages exist.
+
+new trader notices an arbitrage
+
+Take for example the Poloniex and Bitfinex exchanges and a favorite BTC - ETH currency pair. At some point during the day, you might notice that the Poloniex ASK price is lower than the Bitfinex BID price, and decide that this is an excellent opportunity to buy low and sell high.
+
+Poloniex ASK price - 0.076396
+Bitfinex BID price - 0.076485
+First, to buy ETH on Poloniex, some BTC is needed to trade. Let's assume that the Poloniex wallet has been sent 1 BTC in advance.
+
+Step (1) Buy "low" on Poloniex -
+
+1 BTC buy ETH for 0.076396 = 13.08969056 ETH
+Then in some miraculous way, manage to transfer these ETH to Bitfinex. Step (2) Sell "high" on Bitfinex -
+
+13.08969056 ETH sell for 0.076485 BTC = 1.00116498
+This arbitrage netted us with 116,498 satoshis more than we had before.
+
+Profit! Right?
+
+Not so fast. Several assumptions make this trade unrealistic. The first assumption is that there is a miraculous way to transfer funds from one exchange to the other, and another assumption that there are no fees involved. In fact, there are no miracles when it comes to trading, so solutions for these assumptions need to be explored.
+
+To miraculously move funds, I suggest two possible options for consideration -
+
+Option one is to withdraw from one exchange and transfer ETH into the second exchange. Some newbies to crypto might think that they need to move coins first from Poloniex to their personal wallet, and then from there into Bitfinex. Seasoned traders can tell you; this is not true, there is a way to transfer funds from a wallet at Poloniex to Bitfinex directly and just save quite a lot of hassle.
+
+But even with time saved, there are still withdrawal fees to take into account. According to Poloniex, withdrawing ETH incurs a fee of -0.005 ETH. How much does it cost exactly using the higher ETH price?
+
+-0.00500000 ETH sell for 0.076485 BTC = -0.00038242
+Here go 38,242 satoshis down the drain, leaving just 78,256 satoshis for our precious profit, a very hefty price to pay. And if that was not enough, then there is another severe problem with this method, it takes (a long) time - during this period the price at Bitfinex might no longer be the original price seen at the moment of the original signal, making this whole arbitrage business more of a speculation. Speculation is hoping that the price will remain the same or rise a bit to maintain profits and it is not in the spirit of the original riskless and immediate arbitrage idea.
+
+The first option is out; let's see what else is there.
+
+Option two, having some ETH sitting and waiting for opportunities at Bitfinex. When an arbitrage is spotted - immediately trade using existing ETH liquidity, removing the requirement to transfer any funds from one exchange to another. It does require to hold some ETH cash on the selling side. Eventually, after multiple arbitrage executions, more ETH accumulates on Poloniex where the buy trades occur, and less ETH on Bitfinex where it is regularly being sold for profit. Maybe eventually there will even be zero ETH remaining on Bitfinex since it was all used up in trades while a whole bunch on Poloniex where cheap buys were happening.
+
+This second option means that there is always some ETH that needs to be liquid on the exchange where sell trades occur. There is no way of knowing where such sell and buy opportunities will appear, so it is a good idea to keep ETH on both exchanges and just wait for signals - hopefully, the signal to sell high will be coming from a different exchange each time, or at least some of the times. I call this "The Pendulum," the balance of ETH is seamlessly moving from one exchange to another back and forth. Great! No more actual transfers of ETH are required, saving the time and transfer fees. But the total amount of ETH across all exchanges better be preserved, or we end up with no liquidity to arbitrage anymore.
+
+The problem of moving ETH around is solved, but more assumptions to dispell remain -
+
+The seasoned traders among you have been yelling for the last couple of paragraphs: "But what about trading fees!!! You must not forget the trading fees!!!", It is correct; there are also the trading fees on each exchange to take into account. Let's calculate what effect these have on the profit of our fantastic arbitrage opportunity.
+
+Poloniex taker fee - 0.25%
+Bitfinex taker fee - 0.20%
+Some of you might ask, "But why `taker` fee?". Well, since the arbitrage needs to happen "Right Now!" using the current ASK and BID price, these trades are considered as "taking liquidity from the market" as they take a portion away from the order book. To utilize the `maker` fee trades would have to be placed on the order book as limit orders. Limit orders are not executed immediately but only when someone else takes the assigned offer. Since predicting the direction of price movements is speculation and not arbitrage. In arbitrage, trades need to happen simultaneously on both exchanges at once and cannot sit there in the order book hoping that the price will "go our way" since it probably will not.
+
+Let's do the math again, this time taking fees into account. First, buy on Poloniex -
+
+1 BTC buy ETH for 0.076396 substract 0.25% = 13.056966334 ETH
+And immediately on Bitfinex, use existing ETH cash and pay 0.2% fee -
+
+13.056966334 ETH sell for 0.076485 BTC = 0.99666474
+Resulting profit is actually a loss of -
+
+-0.00333526
+Oh no, when fees are applied the loss is 333,526 satoshis! This number is three times higher than the profit calculated in the first step. But it is a loss, not profit!
+
+Here is when veterans casually throw out a warning to naive new traders who think that exchanges are dumb and money is just lying there on the table for the taking.
+
+WARNING: Beware the fees!
+If only the price difference were larger, then there must be a profitable opportunity in there somewhere right? We just chose a non-profitable arbitrage, but surely there are many profitable ones.
+
+Which is why I want to introduce our friend, Math. Using simple math, there are just a couple of calculations that show how to discover such arbitrage profit and learn its exact value.
+
+Step (0) Some symbols to denote amounts of various things -
+
+x is the amount of BTC used to buy ETH
+y is the amount of ETH bought
+p is the price in BTC at the `buy low` exchange
+q is the price in BTC at the `sell high` exchange
+f is the fee % at the `buy low` exchange
+g is the fee % at the `sell high` exchange
+δ is the amount of BTC gained by the arbitrage
+Step (1) buy ETH using BTC, taking into account the fees incurred
+(x/p)(1-f)=y
+Step (2) the same amount of ETH is used on the second exchange to sell into BTC, with fees
+yq(1-g)=x+δ
+The total balance (across all exchanges) of ETH needs to be kept at a fixed value leaving the profits in BTC while maintaining liquidity of ETH for future arbitrage opportunities. The profit needs to be positive, so start by isolating profit and the ETH amount to make calculations easier -
+y = (x/p)(1-f) = (x+δ)/[q(1-g)]
+
+(x+δ)/x = (q/p)(1-f)(1-g)
+
+δ = x[(q/p)(1-f)(1-g) - 1]
+Lets test this equation using values from a previous example -
+δ = 1*[(0.076485/0.076396)*0.9975*0.998 - 1] = -0.00333525
+The result is the same number of lost satoshis as before, which suggests that the math is most likely correct.
+
+Tip: To quickly check when an arbitrage opportunity has profit in it, you can use this simple inequality -
+q(1-f)(1-g) > p  means  δ > 0
+Voila! When selling price reduced by both fees is higher than buying price, it's a profitable arbitrage opportunity.
+
+Done, for now, hope you liked this short break-down of an arbitrage trade. More aspects not touched in this article, like the depth of order books available, liquidity balance at each exchange, how to rebalance liquidity, leveraged trades, ask-ask and bid-bid arbitrages and much more must be left for future articles.
+
+Feel free to upvote to reward this content and share it with your friends.

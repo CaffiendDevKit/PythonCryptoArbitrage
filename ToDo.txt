@@ -1,0 +1,17 @@
+Program header - welcome, basic instructions etc
+Get user input for 3 coins
+	-coin1
+	-coin2
+	-coin3
+Pass that user input to arbitrage class
+	Will create a Connection object for a given exchange
+	arbitage class checks if a profit is possible
+	returns if trade is possible / or if a trade has been made
+
+Connection class
+	will make the connection to the api
+	have it prompt a user for an api key if one doesn't exist.
+		- same api key when given it.
+	will need functions 
+		for getting prices for a given coin.
+		dealing with slow down requests from api.
