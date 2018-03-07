@@ -5,11 +5,9 @@ Created on 6 Mar. 2018
 
 This Module is used to manage the connection and API commands of several exchanges.
 '''
-import urllib.request #used for URL requests
-from datetime import datetime #used to get UTC time for API
+import urllib.request #used for URL requests #used to get UTC time for API
 import hmac
 import hashlib
-from wheel.signatures.djbec import publickey
 
 class Connection():
     '''
