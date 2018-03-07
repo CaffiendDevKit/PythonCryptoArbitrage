@@ -18,6 +18,15 @@ class Connection():
     SECRETKEY = ""
     PUBLICKEY = ""
     
+    def setKeys(self, keys):
+        '''
+        dict{exchange[public:secret]} -> none
+        used to set the public and private keys class variables.
+        '''
+        keysList = keys[self.EXCHANGE]
+        self.PUBLICKEY = keysList[0]
+        self.SECRETKEY = keysList[1]
+    
     def serverTimeConvert(self, time):
         '''
         bytes -> str
@@ -73,8 +82,6 @@ class Connection():
         Constructor
         '''
         self.EXCHANGE = userExchange
-        self.SECRETKEY = "removed" #replace with read from file
-        self.PUBLICKEY = "removed" 
             
         if(self.testConnection()):
             print("Connection successful: got ping response")
@@ -83,9 +90,11 @@ class Connection():
               
         serverTimeStamp = self.serverTimeConvert(self.getServerTime())
         
-        accountInfo = self.getAccountInfo(serverTimeStamp)
-
-        print('Account Info : {}'.format(accountInfo))
+#===============================================================================
+#         accountInfo = self.getAccountInfo(serverTimeStamp)
+# 
+#         print('Account Info : {}'.format(accountInfo))
+#===============================================================================
             
 if __name__ == '__main__':
     #For unit testing
