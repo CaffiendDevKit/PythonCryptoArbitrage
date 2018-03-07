@@ -73,8 +73,8 @@ class Connection():
         Constructor
         '''
         self.EXCHANGE = userExchange
-        self.SECRETKEY = "tSenFjzcK0di5R5sbMmMqrwZUl0DvhW2zxN5AMF0Zef3jqauuK0626kk0NU8w3EQ"
-        self.PUBLICKEY = "EvD1OEO3BzysdPiUWyHmjWVHCR9iGl9vwit1yKqD4uIh4rcEqavnKOEfuIATSo3R"
+        self.SECRETKEY = "removed" #replace with read from file
+        self.PUBLICKEY = "removed" 
             
         if(self.testConnection()):
             print("Connection successful: got ping response")
