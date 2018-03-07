@@ -75,6 +75,12 @@ class Connection():
             publicKeyHeader = {"X-MBX-APIKEY": self.PUBLICKEY}
             request = urllib.request.Request(requestUrl, headers=publicKeyHeader)
             return(urllib.request.urlopen(request).read())
+        
+    def getCoinPrice(self,pair):
+        if(self.EXCHANGE == "Binance"):
+            requestUrl = "https://api.binance.com/api/v3/ticker/price?" \
+                + 'symbol={}'.format(pair)
+            return(urllib.request.urlopen(requestUrl).read())
 
 
     def __init__(self, userExchange):
@@ -87,16 +93,39 @@ class Connection():
             print("Connection successful: got ping response")
         else:
             print("Connection failed: no ping response")
-              
-        serverTimeStamp = self.serverTimeConvert(self.getServerTime())
+            
+
+class CoinPair():
+    '''
+    classdocs
+    '''
+    
+    #===========================================================================
+    # pairName
+    # price
+    #===========================================================================
+    
+    def __init__(self):
+        '''
+        Constructor
+        '''
         
-#===============================================================================
-#         accountInfo = self.getAccountInfo(serverTimeStamp)
-# 
-#         print('Account Info : {}'.format(accountInfo))
-#===============================================================================
             
 if __name__ == '__main__':
     #For unit testing
-    binnance = Connection("Binance")
+    import crypto_arbitage
+    
+    binance = Connection("Binance")
+    
+    crypto = crypto_arbitage.CryptoArbitage()
+    
+    binance.setKeys(crypto.getKeys())
+    
+    serverTimeStamp = binance.serverTimeConvert(binance.getServerTime())
+        
+    accountInfo = binance.getAccountInfo(serverTimeStamp)
+    print('Account Info : {}'.format(accountInfo))
+    
+    pairName = "ETHBTC"
+    print(binance.getCoinPrice(pairName))
     

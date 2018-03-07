@@ -43,12 +43,12 @@ class CryptoArbitage():
         
 if __name__ == '__main__':
     print('Welcome to Crypto Arbitage made with python')
-    print('Arbitage is taking three coins and seeing if a profit can be made trading between them')
-    print('Please enter the coins to search for')
+    print('Arbitage is taking three coin pairs and seeing if a profit can be made trading between them')
+    print('Please enter the coin pair to search for')
     #===========================================================================
-    # coin1 = input("Coin 1:")
-    # coin2 = input("Coin 2:")
-    # coin3 = input("Coin 3:")
+    # coin1 = input("Coin pair 1:")
+    # coin2 = input("Coin pair 2:")
+    # coin3 = input("Coin pair 3:")
     #===========================================================================
     
     crypto = CryptoArbitage()
