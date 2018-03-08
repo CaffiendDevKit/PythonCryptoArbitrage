@@ -121,6 +121,12 @@ class CoinPair():
         
     def getName(self):
         return(self.pairName)
+    
+    def getTopCoin(self):
+        return(self.topCoin)
+    
+    def getBaseCoin(self):
+        return(self.baseCoin)
         
             
 if __name__ == '__main__':
