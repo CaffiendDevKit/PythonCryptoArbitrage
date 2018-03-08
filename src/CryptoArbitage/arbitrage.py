@@ -12,11 +12,17 @@ class Trade():
     tradeType = ""
     orderPair = ""
     
-    def __init__(self, tradeType, orderPair):
+    def __init__(self):
         '''
         Constructor
         '''
+        
+        
+        
+    def setTradeType(self, tradeType):
         self.tradeType = tradeType
+        
+    def setOrderPair(self, orderPair):
         self.orderPair = orderPair
         
     def getTradeType(self):
@@ -53,93 +59,162 @@ class TriArbitrage():
         #                 if y != x and i != x:
         #                     print("{}->{}->{}->{}".format(i,y,x,i))
         #=======================================================================
-                            
-                            
+        
+        
+        sell = "Sell"
+        buy = "Buy" 
+        it = 0
+        trades = dict()    
         for i in coins:
+            listTrades = list()
             for y in coins:
                 if i != y:
+                    first = Trade()
                     test1 = i+y
                     if test1 == nameCP1:
                         print()
                         print("Order Type: Sell")
                         print("Order pair: {}".format(nameCP1))
+                        first.setTradeType(sell)
+                        first.setOrderPair(nameCP1)
+                        listTrades.append(first)
                     elif test1 == nameCP2:
                         print()
                         print("Order Type: Sell")
                         print("Order pair: {}".format(nameCP2))
+                        first.setTradeType(sell)
+                        first.setOrderPair(nameCP2)
+                        listTrades.append(first)
                     elif test1 == nameCP3:
                         print()
                         print("Order Type: Sell")
                         print("Order pair: {}".format(nameCP3))
+                        first.setTradeType(sell)
+                        first.setOrderPair(nameCP3)
+                        listTrades.append(first)
                     test2 = y+i
                     if test2 == nameCP1:
                         print()
                         print("Order Type: Buy")
                         print("Order pair: {}".format(nameCP1))
+                        first.setTradeType(buy)
+                        first.setOrderPair(nameCP1)
+                        listTrades.append(first)
                     elif test2 == nameCP2:
                         print()
                         print("Order Type: Buy")
                         print("Order pair: {}".format(nameCP2))
+                        first.setTradeType(buy)
+                        first.setOrderPair(nameCP2)
+                        listTrades.append(first)
                     elif test2 == nameCP3:
                         print()
                         print("Order Type: Buy")
                         print("Order pair: {}".format(nameCP3))
+                        first.setTradeType(buy)
+                        first.setOrderPair(nameCP3)
+                        listTrades.append(first)
                     for x in coins:
                         if y != x and i != x:
+                            second = Trade()
                             test1 = y+x
                             if test1 == nameCP1:
                                 print()
                                 print("Order Type: Sell")
                                 print("Order pair: {}".format(nameCP1))
+                                second.setTradeType(sell)
+                                second.setOrderPair(nameCP1)
+                                listTrades.append(second)
                             elif test1 == nameCP2:
                                 print()
                                 print("Order Type: Sell")
                                 print("Order pair: {}".format(nameCP2))
+                                second.setTradeType(sell)
+                                second.setOrderPair(nameCP2)
+                                listTrades.append(second)
                             elif test1 == nameCP3:
                                 print()
                                 print("Order Type: Sell")
                                 print("Order pair: {}".format(nameCP3))
+                                second.setTradeType(sell)
+                                second.setOrderPair(nameCP3)
+                                listTrades.append(second)
                             test2 = x+y
                             if test2 == nameCP1:
                                 print()
                                 print("Order Type: Buy")
                                 print("Order pair: {}".format(nameCP1))
+                                second.setTradeType(buy)
+                                second.setOrderPair(nameCP1)
+                                listTrades.append(second)
                             elif test2 == nameCP2:
                                 print()
                                 print("Order Type: Buy")
                                 print("Order pair: {}".format(nameCP2))
+                                second.setTradeType(buy)
+                                second.setOrderPair(nameCP2)
+                                listTrades.append(second)
                             elif test2 == nameCP3:
                                 print()
                                 print("Order Type: Buy")
                                 print("Order pair: {}".format(nameCP3))
+                                second.setTradeType(buy)
+                                second.setOrderPair(nameCP3)
+                                listTrades.append(second)
                                 
+                            third = Trade()
                             test1 = x+i
                             if test1 == nameCP1:
                                 print()
                                 print("Order Type: Sell")
                                 print("Order pair: {}".format(nameCP1))
+                                third.setTradeType(sell)
+                                third.setOrderPair(nameCP1)
+                                listTrades.append(third)
                             elif test1 == nameCP2:
                                 print()
                                 print("Order Type: Sell")
                                 print("Order pair: {}".format(nameCP2))
+                                third.setTradeType(sell)
+                                third.setOrderPair(nameCP2)
+                                listTrades.append(third)
                             elif test1 == nameCP3:
                                 print()
                                 print("Order Type: Sell")
                                 print("Order pair: {}".format(nameCP3))
+                                third.setTradeType(sell)
+                                third.setOrderPair(nameCP3)
+                                listTrades.append(third)
                             test2 =i+x
                             if test2 == nameCP1:
                                 print()
                                 print("Order Type: Buy")
                                 print("Order pair: {}".format(nameCP1))
+                                third.setTradeType(buy)
+                                third.setOrderPair(nameCP1)
+                                listTrades.append(third)
                             elif test2 == nameCP2:
                                 print()
                                 print("Order Type: Buy")
                                 print("Order pair: {}".format(nameCP2))
+                                third.setTradeType(buy)
+                                third.setOrderPair(nameCP2)
+                                listTrades.append(third)
                             elif test2 == nameCP3:
                                 print()
                                 print("Order Type: Buy")
                                 print("Order pair: {}".format(nameCP3))
+                                third.setTradeType(buy)
+                                third.setOrderPair(nameCP3)
+                                listTrades.append(third)
                             print("{}->{}->{}->{}".format(i,y,x,i))
+                            trades[it]=listTrades
+                            it = it + 1
+        print("Trades dict: {}".format(trades))
+        if len(trades) > 0:
+            return(True)
+        else:
+            return(False)
     
     def tryArbitrage(self, coinP1, coinP2, coinP3):
         #I have 1 BTC to trade with
@@ -167,8 +242,14 @@ if __name__ == '__main__':
     
     tryArb = TriArbitrage()
     
+    #===========================================================================
+    # coin1Name="ETHBTC"
+    # coin2Name="LTCETH"
+    # coin3Name="LTCBTC"
+    #===========================================================================
+    
     coin1Name="ETHBTC"
-    coin2Name="LTCETH"
+    coin2Name="MTHETH"
     coin3Name="LTCBTC"
     
     coin1 = CoinPair(coin1Name)
