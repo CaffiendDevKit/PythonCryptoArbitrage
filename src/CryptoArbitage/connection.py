@@ -8,6 +8,7 @@ This Module is used to manage the connection and API commands of several exchang
 import urllib.request #used for URL requests #used to get UTC time for API
 import hmac
 import hashlib
+import json
 
 class Connection():
     '''
@@ -80,8 +81,9 @@ class Connection():
         if(self.EXCHANGE == "Binance"):
             requestUrl = "https://api.binance.com/api/v3/ticker/price?" \
                 + 'symbol={}'.format(pair)
-            return(urllib.request.urlopen(requestUrl).read())
-
+            priceArray = urllib.request.urlopen(requestUrl).read().decode('UTF-8')
+            priceArray = json.loads(priceArray)
+            return(priceArray['price'])
 
     def __init__(self, userExchange):
         '''
@@ -100,15 +102,25 @@ class CoinPair():
     classdocs
     '''
     
-    #===========================================================================
-    # pairName
-    # price
-    #===========================================================================
+    pairName = ""
+    price = 0
+    baseCoin = ""
+    topCoin = ""
     
-    def __init__(self):
+    def __init__(self, name):
         '''
         Constructor
         '''
+        self.pairName = name
+        n = 3
+        self.topCoin, self.baseCoin = [self.pairName[i:i+n] for i in range(0, len(self.pairName), n)]
+        
+    def setPrice(self, userPrice):
+        # Not working
+        self.price = userPrice
+        
+    def getName(self):
+        return(self.pairName)
         
             
 if __name__ == '__main__':
@@ -127,5 +139,9 @@ if __name__ == '__main__':
     print('Account Info : {}'.format(accountInfo))
     
     pairName = "ETHBTC"
-    print(binance.getCoinPrice(pairName))
+    pair = CoinPair(pairName)
+    pair.setPrice(binance.getCoinPrice(pairName))
+    print(pair.price)
+
+    
     

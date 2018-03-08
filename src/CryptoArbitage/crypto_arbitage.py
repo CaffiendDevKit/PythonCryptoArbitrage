@@ -3,7 +3,7 @@ Created on 5 Mar. 2018
 
 @author: Alex
 '''
-import connection
+from connection import *
 
 class CryptoArbitage():
     '''
@@ -41,18 +41,46 @@ class CryptoArbitage():
         return({exchange:[apiKey,secretKey]})
     
         
-if __name__ == '__main__':
+if __name__ == '__main__': 
+    crypto = CryptoArbitage()
+    
+    binance = Connection("Binance")
+    binance.setKeys(crypto.getKeys())
+    
     print('Welcome to Crypto Arbitage made with python')
     print('Arbitage is taking three coin pairs and seeing if a profit can be made trading between them')
     print('Please enter the coin pair to search for')
+    
     #===========================================================================
     # coin1 = input("Coin pair 1:")
     # coin2 = input("Coin pair 2:")
     # coin3 = input("Coin pair 3:")
+    # 
+    # coin1 = CoinPair(coin1)
+    # coin2 = CoinPair(coin2)
+    # coin3 = CoinPair(coin3)
     #===========================================================================
     
-    crypto = CryptoArbitage()
+    #For testing
+    coin1Name="ETHBTC"
+    coin2Name="LTCETH"
+    coin3Name="LTCBTC"
     
-    binance = connection.Connection("Binance")
-    binance.setKeys(crypto.getKeys())
+    coin1 = CoinPair(coin1Name)
+    coin2 = CoinPair(coin2Name)
+    coin3 = CoinPair(coin3Name)
+
+    coin1.setPrice(binance.getCoinPrice(coin1Name))
+    coin2.setPrice(binance.getCoinPrice(coin2Name))
+    coin3.setPrice(binance.getCoinPrice(coin3Name))
     
+    print("Coin Pair: {} - Price: {}".format(coin1.getName(), coin1.price))
+    print("Coin Pair: {} - Price: {}".format(coin2.getName(), coin2.price))
+    print("Coin Pair: {} - Price: {}".format(coin3.getName(), coin3.price))
+    
+    #===========================================================================
+    # Production code
+    # coin1.setPrice(binance.getCoinPrice(coin1.getName()))
+    # coin2.setPrice(binance.getCoinPrice(coin2.getName()))
+    # coin3.setPrice(binance.getCoinPrice(coin3.getName()))
+    #===========================================================================
